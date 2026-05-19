@@ -1,0 +1,37 @@
+{
+	"name": "pipeline5",
+	"properties": {
+		"activities": [
+			{
+				"name": "Filter1",
+				"type": "Filter",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.list",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@contains(item(), 'Data')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"list": {
+				"type": "array",
+				"defaultValue": [
+					"Data Engineer",
+					"Test Engineer",
+					"Azure Factory",
+					"Data System"
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-05-15T13:01:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,60 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variablex",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "varx",
+					"value": 5
+				}
+			},
+			{
+				"name": "Set variablez",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variablex",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "varz",
+					"value": {
+						"value": "@add(variables('varx'),variables('vary'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"varx": {
+				"type": "Integer"
+			},
+			"vary": {
+				"type": "Integer",
+				"defaultValue": 10
+			},
+			"varz": {
+				"type": "Integer"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-05-14T10:03:18Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

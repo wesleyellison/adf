@@ -1,0 +1,15 @@
+{
+	"name": "adt-training",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "dc28596e-ef67-4944-bf4a-16e5dab77322",
+		"tenantId": "41a3c0a4-a536-41ff-9051-1fc0a2747933"
+	}
+}
