@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adt-training"
+		},
+		"AzureSqlDatabase_password": {
+			"value": ""
+		},
+		"ls_abs_we_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase_properties_typeProperties_server": {
+			"value": "db-we.database.windows.net"
+		},
+		"AzureSqlDatabase_properties_typeProperties_database": {
+			"value": "free-sql-db-3244322"
+		},
+		"AzureSqlDatabase_properties_typeProperties_userName": {
+			"value": "we-admin"
+		}
+	}
+}
