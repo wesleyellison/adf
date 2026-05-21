@@ -1,0 +1,26 @@
+{
+	"name": "pipeline11",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			}
+		],
+		"parameters": {
+			"x": {
+				"type": "string"
+			},
+			"y": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
