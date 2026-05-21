@@ -1,0 +1,35 @@
+{
+	"name": "ds_dynamic_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_abs_we",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "source"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "DEPTNO",
+				"type": "String"
+			},
+			{
+				"name": "DNAME",
+				"type": "String"
+			},
+			{
+				"name": "LOC",
+				"type": "String"
+			}
+		]
+	}
+}
