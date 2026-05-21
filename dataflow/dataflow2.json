@@ -25,14 +25,16 @@
 				"          JOB as string,",
 				"          MGR as string,",
 				"          HIREDATE as string,",
-				"          SAL as string,",
+				"          SAL as float,",
 				"          COMM as string,",
 				"          DEPTNO as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 window() ~> window1"
+				"source1 window(over(DEPTNO),",
+				"     asc(SAL, true),",
+				"     avgsalary = avg(SAL)) ~> window1"
 			]
 		}
 	}
