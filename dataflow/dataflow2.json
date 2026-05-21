@@ -34,7 +34,8 @@
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 window(over(DEPTNO),",
 				"     asc(SAL, true),",
-				"     avgsalary = avg(SAL)) ~> window1"
+				"     avgsalary = avg(SAL),",
+				"          totalemployees = count(EMPNO)) ~> window1"
 			]
 		}
 	}
