@@ -64,7 +64,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
-											"value": "@pipeline().parameters.missedfilesnames",
+											"value": "@item().name",
 											"type": "Expression"
 										}
 									}
