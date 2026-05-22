@@ -1,0 +1,37 @@
+{
+	"name": "ds_blob_source_new_param",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_abs_we",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"folderPath": "new/source",
+				"container": "source"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": ";prod1:description;area1",
+				"type": "String"
+			}
+		]
+	}
+}
