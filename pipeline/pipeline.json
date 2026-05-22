@@ -1,6 +1,155 @@
 {
-	"name": "pipeline14",
+	"name": "pipeline",
 	"properties": {
+		"activities": [
+			{
+				"name": "get sourcefiles",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_blob_source_new",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "get destfiles",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_blob_dest_new",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "count of source files",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "get sourcefiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "sourcefilecount",
+					"value": {
+						"value": "@{length(activity('get sourcefiles').output.childItems)}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "count of dest files",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "get destfiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "destfilecount",
+					"value": {
+						"value": "@{length(activity('get destfiles').output.childItems)}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "missed files",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "count of source files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "count of dest files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "missedfilescount",
+					"value": {
+						"value": "@{sub(\n    int(variables('sourcefilecount')),\n    int(variables('destfilecount'))\n    )\n    }",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"sourcefilecount": {
+				"type": "String"
+			},
+			"destfilecount": {
+				"type": "String"
+			},
+			"missedfilescount": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
