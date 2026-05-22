@@ -1,0 +1,15 @@
+{
+	"name": "adf-training-new",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f8fe943d-e5fe-409c-a57e-36b5af6702f0",
+		"tenantId": "41a3c0a4-a536-41ff-9051-1fc0a2747933"
+	}
+}

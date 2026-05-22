@@ -3,58 +3,29 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Set variablex",
-				"type": "SetVariable",
+				"name": "Web1",
+				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
 					"secureInput": false
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "varx",
-					"value": 5
-				}
-			},
-			{
-				"name": "Set variablez",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Set variablex",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "varz",
-					"value": {
-						"value": "@add(variables('varx'),variables('vary'))",
-						"type": "Expression"
+					"method": "POST",
+					"url": "https://management.azure.com/subscriptions/c85c87d6-15e3-49d8-9927-222235e8ef29/resourceGroups/rg-WE/providers/Microsoft.DataFactory/factories/adt-training/pipelines/https://management.azure.com/subscriptions/c85c87d6-15e3-49d8-9927-222235e8ef29/resourceGroups/rg-WE/providers/Microsoft.DataFactory/factories/adt-training/pipelines/41e5e37b-376c-45ef-a0e8-752592ba779a/createrun?api-version=2018-06-01/createrun?api-version=2018-06-01",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com"
 					}
 				}
 			}
 		],
-		"variables": {
-			"varx": {
-				"type": "Integer"
-			},
-			"vary": {
-				"type": "Integer",
-				"defaultValue": 10
-			},
-			"varz": {
-				"type": "Integer"
-			}
-		},
 		"annotations": [],
-		"lastPublishTime": "2026-05-14T10:03:18Z"
+		"lastPublishTime": "2026-05-22T13:56:29Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }
