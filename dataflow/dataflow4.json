@@ -16,6 +16,15 @@
 			"transformations": [
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "derivedColumn3"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -25,7 +34,19 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 derive(col1 = split(Prop0, ';')) ~> derivedColumn1"
+				"source1 derive(col1 = split(Column_1, ';')) ~> derivedColumn1",
+				"derivedColumn1 derive(col2 = split(col1[2], ':')) ~> derivedColumn2",
+				"derivedColumn2 derive(product = col2[1],",
+				"          description = col2[2],",
+				"          area = col1[3]) ~> derivedColumn3",
+				"derivedColumn3 select(mapColumn(",
+				"          Column_1,",
+				"          product,",
+				"          description,",
+				"          area",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
