@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"method": "POST",
 					"turnOffAsync": true,
-					"url": "https://management.azure.com/subscriptions/c85c87d6-15e3-49d8-9927-222235e8ef29/resourceGroups/rg-WE/providers/Microsoft.DataFactory/factories/adt-training/pipelines/https://management.azure.com/subscriptions/c85c87d6-15e3-49d8-9927-222235e8ef29/resourceGroups/rg-WE/providers/Microsoft.DataFactory/factories/adt-training/pipelines/41e5e37b-376c-45ef-a0e8-752592ba779a/createrun?api-version=2018-06-01",
+					"url": "https://management.azure.com/subscriptions/c85c87d6-15e3-49d8-9927-222235e8ef29/resourceGroups/rg-WE/providers/Microsoft.DataFactory/factories/adt-training/pipelines/41e5e37b-376c-45ef-a0e8-752592ba779a/createrun?api-version=2018-06-01",
 					"authentication": {
 						"type": "MSI",
 						"resource": "https://management.azure.com"
