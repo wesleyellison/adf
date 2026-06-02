@@ -80,27 +80,11 @@
 			"source_tables": {
 				"type": "Array",
 				"defaultValue": [
-					"SalesLT.Address",
-					"SalesLT.Customer",
-					"SalesLT.CustomerAddress",
-					"SalesLT.Product"
+					"Address",
+					"Customer",
+					"CustomerAddress",
+					"Product"
 				]
-			},
-			"dest_tables": {
-				"type": "Array",
-				"defaultValue": [
-					"dest.Address",
-					"dest.Customer",
-					"dest.CustomerAddress",
-					"dest.Product"
-				]
-			},
-			"index": {
-				"type": "Integer",
-				"defaultValue": 0
-			},
-			"temp": {
-				"type": "Integer"
 			}
 		},
 		"annotations": []
