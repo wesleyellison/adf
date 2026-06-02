@@ -1,0 +1,103 @@
+{
+	"name": "pipeline125",
+	"properties": {
+		"activities": [
+			{
+				"name": "email notification tempate",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderStoredProcedureName": "[dbo].[uspemail]",
+						"storedProcedureParameters": {
+							"adfname": {
+								"type": "String",
+								"value": {
+									"value": "@pipeline().DataFactory",
+									"type": "Expression"
+								}
+							},
+							"errormessage": {
+								"type": "String",
+								"value": null
+							},
+							"pipelinename": {
+								"type": "String",
+								"value": {
+									"value": "@pipeline().Pipeline",
+									"type": "Expression"
+								}
+							},
+							"status": {
+								"type": "String",
+								"value": {
+									"value": "@variables('status_start')",
+									"type": "Expression"
+								}
+							}
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_AzureSqlTable_customer",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "email notification tempate",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-60.eastus.logic.azure.com:443/workflows/4a4a9171e8234724863dcc9fa0bee15a/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=_Ud3A91-jQ1AHt5G5B63gFq0f1PkeCM-Asg6D__BPJM",
+					"body": {
+						"value": "@concat('\n{\n    \"subject\":\"',activity('email notification tempate').output.value[0].subject,'\",\n    \"to\":\"',activity('email notification tempate').output.value[0].recipients,'\",\n    \"body\":\"',activity('email notification tempate').output.value[0].body,'\"\n}\n')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"status_start": {
+				"type": "String",
+				"defaultValue": "Start"
+			},
+			"status_success": {
+				"type": "String",
+				"defaultValue": "Success"
+			},
+			"status_faliure": {
+				"type": "String",
+				"defaultValue": "Failed"
+			}
+		},
+		"annotations": []
+	}
+}
