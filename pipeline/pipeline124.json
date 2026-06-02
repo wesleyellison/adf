@@ -1,0 +1,35 @@
+{
+	"name": "pipeline124",
+	"properties": {
+		"activities": [
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-60.eastus.logic.azure.com:443/workflows/4a4a9171e8234724863dcc9fa0bee15a/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=_Ud3A91-jQ1AHt5G5B63gFq0f1PkeCM-Asg6D__BPJM",
+					"body": {
+						"value": "@concat('\n{\n    \"to\":\"',variables('to'),'\",\n    \"subject\":\"This is a test email\",\n    \"body\":\"body test\"\n}\n')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"to": {
+				"type": "String",
+				"defaultValue": "wesley_ellison@fastmail.co.uk"
+			}
+		},
+		"annotations": []
+	}
+}
